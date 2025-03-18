@@ -29,9 +29,17 @@ def add_job():
     db_sess.commit()
 
 def main():
-    data.db_session.global_init("db/bd.db")
-    add_job()
-    add_user()
+    database_file = input()
+    data.db_session.global_init(f"db/{database_file}")
+    db_sess = data.db_session.create_session()
+    max_work = []
+    for job in db_sess.query(Jobs).all():
+        max_work.append(job.work_size)
+    for job in db_sess.query(Jobs).filter(Jobs.work_size == max(max_work)).all():
+        id_lider = job.team_leader
+    for user in db_sess.query(User).filter(User.id == id_lider).all():
+        print(user.name, user.surname)
+
 
 
 

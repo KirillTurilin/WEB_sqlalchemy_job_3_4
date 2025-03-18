@@ -1,5 +1,4 @@
-import datetime
-
+import sqlalchemy
 import sqlalchemy
 from .db_session import SqlAlchemyBase
 
@@ -16,7 +15,7 @@ class Jobs(SqlAlchemyBase):
 
     collaborators = sqlalchemy.Column(sqlalchemy.String)
 
-    start_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
-    end_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
+    start_date = sqlalchemy.Column(sqlalchemy.DateTime)
+    end_date = sqlalchemy.Column(sqlalchemy.DateTime)
 
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean)
